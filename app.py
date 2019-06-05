@@ -1,11 +1,14 @@
 from flask import Flask
-app = Flask(__name__)
+import socketio
+# from wsgi import app
+  # a Flask, Django, etc. application
+appF = Flask(__name__)
 
 # create a Socket.IO server
 sio = socketio.Server()
 
-# wrap with a WSGI application
-sio.attach(app)
+app = socketio.WSGIApp(sio, appF)
+
 
 @sio.event
 def connect(sid, environ):
