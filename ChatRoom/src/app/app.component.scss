@@ -1,3 +1,4 @@
+
 body{
     height: 100vh;
 }
@@ -21,6 +22,10 @@ body{
     height: 15%;
     border-radius: 5px;
     background: lightgray;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
-
-@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+.message-container{
+    width:90%;
+}

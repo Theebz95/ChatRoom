@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { ChatService } from '../services/ChatService';
+
 
 @Component({
   selector: 'app-root',
   template: `
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <div class="container">
     <div style="text-align:center">
       <h1 class="app-title">
@@ -16,8 +15,10 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 
     </div>
     <div class="your-message">
-      <input type="text" />
-      <input type="submit" />
+      <mat-form-field class="message-container">
+        <textarea matInput placeholder="Leave a comment"></textarea>
+      </mat-form-field>
+      <button mat-raised-button>Send</button>
     </div>
   </div>`,
   styleUrls: ['./app.component.scss']
@@ -25,4 +26,15 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
   
 export class AppComponent {
   title = 'ChatRoom app';
+  constructor(private chat: ChatService){ }
+
+  ngOnInit() {
+    this.chat.messages.subscribe(msg => {
+      console.log(msg);
+    })
+  }
+  sendMessage() {
+    this.chat.sendMsg("Test Message");
+  }
+
 }
